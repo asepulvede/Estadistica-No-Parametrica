@@ -1,6 +1,6 @@
 y= 10+2*randn(200,1); %genero datos normales con media 10, desviación 2
 m= bootstrp(100,@mean,y);
-mean(m) % E(xbar) = mu
+mean(m) % E(xbar) = mu  ----media del estadístico 
 std(m) % sigma/sqrt(n)
 hist(m)
 %intervalo de confianza paramétrico= [xbar-ts&/sqrt(n) xbar+ts&/sqrt(n)]
