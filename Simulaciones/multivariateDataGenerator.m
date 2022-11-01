@@ -1,4 +1,4 @@
-function [nuevos_datos] = multivariateDataGenerator(data)
+function [nuevos_datos] = multivariateDataGenerator(data,n_datos,ploting1, ploting2)
 % multivariateDataGenerator generate multivariate data with the same
 %properties of the original data
 dimensions= size(data);
@@ -36,7 +36,6 @@ for i=1:k
     end
 end
 
-n_datos= 5000;
 nuevos_datos = zeros(n_datos,k);
 
 for w=1:n_datos
@@ -50,28 +49,33 @@ for w=1:n_datos
     nuevos_datos(w,:)= nuevo_dato;
 end
 
-for i =1:k
-    xi = data(:,i);
-    ai = nuevos_datos(:,i);
-    subplot(k,2,(2*i-1))
-    histogram(xi)
-    subplot(k,2,(2*i))
-    histogram(ai)
+if ploting1
+    for i =1:k
+        xi = data(:,i);
+        ai = nuevos_datos(:,i);
+        subplot(k,2,(2*i-1))
+        histogram(xi)
+        subplot(k,2,(2*i))
+        histogram(ai)
+    end
 end
 
-for i =1:k
+if ploting2
+    for i =1:k
+        
+        xi = data(:,i);
 
-    xi = data(:,i);
-
-    ai = nuevos_datos(:,i);
-    [f1,x1] = ksdensity(xi); 
-    [f2,x2] = ksdensity(ai); 
-    dif = abs(f1-f2);
-    %a = 1-trapz(pts,dif)
-    subplot(k,1,i)
-    plot(x1,f1)
-    hold on
-    plot(x2,f2)
+        ai = nuevos_datos(:,i);
+        [f1,x1] = ksdensity(xi); 
+        [f2,x2] = ksdensity(ai); 
+        dif = abs(f1-f2);
+        %a = 1-trapz(pts,dif)
+        subplot(k,1,i)
+        plot(x1,f1)
+        hold on
+        plot(x2,f2)
+    end
 end
+
 
 end
